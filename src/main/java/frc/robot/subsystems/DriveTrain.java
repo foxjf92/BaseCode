@@ -64,10 +64,10 @@ public class DriveTrain extends Subsystem {
     private static final double WHEELBASE = 27.5;
 
     // 2022 Values
-    private static final double FRONT_LEFT_ANGLE_OFFSET = -Math.toRadians(102.3);
-    private static final double FRONT_RIGHT_ANGLE_OFFSET = -Math.toRadians(285.2);
-    private static final double BACK_LEFT_ANGLE_OFFSET = -Math.toRadians(135.2);
-    private static final double BACK_RIGHT_ANGLE_OFFSET = -Math.toRadians(138.5);
+    private static final double FRONT_LEFT_ANGLE_OFFSET = -Math.toRadians(283.3);
+    private static final double FRONT_RIGHT_ANGLE_OFFSET = -Math.toRadians(100.6);
+    private static final double BACK_LEFT_ANGLE_OFFSET = -Math.toRadians(316.2);
+    private static final double BACK_RIGHT_ANGLE_OFFSET = -Math.toRadians(320.9);
 
     // Calibration
     // private static final double FRONT_LEFT_ANGLE_OFFSET = -Math.toRadians(0.0);
@@ -111,7 +111,7 @@ public class DriveTrain extends Subsystem {
 
     public DriveTrain() {
         rightFrontDriveMotor = new CANSparkMax(DRIVETRAIN_FRONT_RIGHT_DRIVE_MOTOR, CANSparkMax.MotorType.kBrushless);
-        rightFrontDriveMotor.setInverted(true);
+        rightFrontDriveMotor.setInverted(false);
         rightFrontDriveMotor.setSmartCurrentLimit(40);
         rightFrontDriveMotor.setIdleMode(IdleMode.kBrake);
         rightFrontRotateMotor = new CANSparkMax(DRIVETRAIN_FRONT_RIGHT_ANGLE_MOTOR, CANSparkMax.MotorType.kBrushless);
@@ -119,7 +119,7 @@ public class DriveTrain extends Subsystem {
         rightFrontRotateMotor.setIdleMode(IdleMode.kBrake);
 
         leftFrontDriveMotor = new CANSparkMax(DRIVETRAIN_FRONT_LEFT_DRIVE_MOTOR, CANSparkMax.MotorType.kBrushless);
-        leftFrontDriveMotor.setInverted(true);
+        leftFrontDriveMotor.setInverted(false);
         leftFrontDriveMotor.setSmartCurrentLimit(40);
         leftFrontDriveMotor.setIdleMode(IdleMode.kBrake);
         leftFrontRotateMotor = new CANSparkMax(DRIVETRAIN_FRONT_LEFT_ANGLE_MOTOR, CANSparkMax.MotorType.kBrushless);
@@ -127,7 +127,7 @@ public class DriveTrain extends Subsystem {
         leftFrontRotateMotor.setIdleMode(IdleMode.kBrake);
 
         rightBackDriveMotor = new CANSparkMax(DRIVETRAIN_BACK_RIGHT_DRIVE_MOTOR, CANSparkMax.MotorType.kBrushless);
-        rightBackDriveMotor.setInverted(true);
+        rightBackDriveMotor.setInverted(false);
         rightBackDriveMotor.setSmartCurrentLimit(40);
         rightBackDriveMotor.setIdleMode(IdleMode.kBrake);
         rightBackRotateMotor = new CANSparkMax(DRIVETRAIN_BACK_RIGHT_ANGLE_MOTOR, CANSparkMax.MotorType.kBrushless);
@@ -135,7 +135,7 @@ public class DriveTrain extends Subsystem {
         rightBackRotateMotor.setIdleMode(IdleMode.kBrake);
 
         leftBackDriveMotor = new CANSparkMax(DRIVETRAIN_BACK_LEFT_DRIVE_MOTOR, CANSparkMax.MotorType.kBrushless);
-        leftBackDriveMotor.setInverted(true);
+        leftBackDriveMotor.setInverted(false);
         leftBackDriveMotor.setSmartCurrentLimit(40);
         leftBackRotateMotor = new CANSparkMax(DRIVETRAIN_BACK_LEFT_ANGLE_MOTOR, CANSparkMax.MotorType.kBrushless);
         leftBackDriveMotor.setIdleMode(IdleMode.kBrake);

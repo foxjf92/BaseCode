@@ -13,7 +13,7 @@ import frc.robot.Robot;
 
 public class IntakeHoldRetracted extends Command {
   
-  private static final double SPEED = 0.1;
+  private static final double SPEED = 0.05;
 
   /**
    * Creates a new Collect command.
@@ -27,13 +27,13 @@ public class IntakeHoldRetracted extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.intake.setExtenderCurrentLimit(5);
+    Robot.intake.setExtenderCurrentLimit(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.intake.retract(-SPEED);
+    Robot.intake.retract(SPEED);
   }
 
   // Called once the command ends or is interrupted.
