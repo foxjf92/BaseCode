@@ -15,12 +15,13 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.DoNothing;
 import frc.robot.commands.ManualShooterSpeed;
 //import edu.wpi.first.wpiutil.math.*;
 
-public class Shooter extends Subsystem {
+public class Shooter extends SubsystemBase {
 
   private Double rpmSetpoint;
 
@@ -39,6 +40,8 @@ public class Shooter extends Subsystem {
   //DigitalInput feedTriggerSwitch;
 
   public Shooter() {
+    
+    setDefaultCommand(new ManualShooterSpeed());
     
     shooterMotor = new TalonFX(SHOOTER_MOTOR_CAN_ID);
     shooterMotor.setNeutralMode(NeutralMode.Coast);
@@ -83,22 +86,17 @@ public class Shooter extends Subsystem {
     //System.out.println("shooter velocity = " + velocity);
   }
 
-  public void setMotorPercent(double value) {
-    shooterMotor.set(ControlMode.PercentOutput, value);
-  }
+  // public void setMotorPercent(double value) {
+  //   shooterMotor.set(ControlMode.PercentOutput, value);
+  // }
 
-  public void setMotorVelocity(double vel) {
-    shooterMotor.set(ControlMode.Velocity, vel);
-  }
+  // public void setMotorVelocity(double vel) {
+  //   shooterMotor.set(ControlMode.Velocity, vel);
+  // }
 
   // public void setFeedSpeed(double speed) {
   //   feedMotor.set(.5*speed);
   // }
-
-  @Override
-  public void initDefaultCommand() {
-    setDefaultCommand(new ManualShooterSpeed());
-  }
 
 // public boolean ballReady() {
 //     return false;

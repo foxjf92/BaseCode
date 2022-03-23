@@ -7,15 +7,15 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.DoNothing;
 
-public class Feeder extends Subsystem {
+public class Feeder extends SubsystemBase {
   private final int FEED_MOTOR_CAN_ID = 11;
   
   CANSparkMax feedMotor;
@@ -42,8 +42,8 @@ public class Feeder extends Subsystem {
 
   // }
 
-  @Override
-  public void initDefaultCommand() {
-  }
+  // @Override
+  // public void initDefaultCommand() {
+  // }
  
 }

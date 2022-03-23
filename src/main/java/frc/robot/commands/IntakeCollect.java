@@ -7,11 +7,12 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class IntakeCollect extends Command {
+public class IntakeCollect extends CommandBase {
   //private static final double EXTEND_SPEED = 0.5;
 
   /**
@@ -19,14 +20,13 @@ public class IntakeCollect extends Command {
    */
   public IntakeCollect() {
     // Use addRequirements() here to declare subsystem dependencies.
-    requires(Robot.intake);
-    requires(Robot.feeder);
+    addRequirements(Robot.intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.intake.setExtenderCurrentLimit(5);
+    Robot.intake.setExtenderCurrentLimit(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,21 +38,11 @@ public class IntakeCollect extends Command {
     if(intakeTriggerCheck > 0.1){
       Robot.intake.setIntakeSpeed(.75);
       Robot.intake.extend(.25);
-
-      if(Robot.feeder.ballStatus1()){
-        Robot.feeder.feed(.5);
-      }
-      else{
-        Robot.feeder.feed(0);
-      }
     }
     else{
       Robot.intake.setIntakeSpeed(0);
     }
-    
 
-    
-    
     //FIXME Work out logic to run feed while intaking, maybe here?
 
     // if(Robot.oi.shooterController.getRawButton(4)) {
@@ -66,10 +56,10 @@ public class IntakeCollect extends Command {
     //   Robot.climber.extend(0);
   }
   
-
   // Called once the command ends or is interrupted.
   @Override
-  public void interrupted() {
+  public void end(boolean interrupted) {
+    Robot.intake.setIntakeSpeed(0);
   }
 
   // Returns true when the command should end.

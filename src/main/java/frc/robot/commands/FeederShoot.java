@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class ClimbCommand extends CommandBase {
-  private static final double CLIMB_SPEED = 1.0;
+public class FeederShoot extends CommandBase {
+  //private static final double EXTEND_SPEED = 0.5;
 
   /**
-   * Creates a new ClimbCommand.
+   * Creates a new Collect command.
    */
-  public ClimbCommand() {
+  public FeederShoot() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.climber);
+    addRequirements(Robot.feeder);
   }
 
   // Called when the command is initially scheduled.
@@ -32,18 +32,15 @@ public class ClimbCommand extends CommandBase {
   @Override
   public void execute() {
 
-    if(Robot.oi.shooterController.getRawButton(6)) {
-      SmartDashboard.putString("ClimbState", "CLIMB EXTENDING");
-      Robot.climber.climb(CLIMB_SPEED);
-    } 
-    else if(Robot.oi.shooterController.getRawButton(5)) {
-      SmartDashboard.putString("ClimbState", "CLIMB RETRACTING");
-      Robot.climber.climb(-CLIMB_SPEED);
-    } 
-    else {
-      SmartDashboard.putString("ClimbState", "STOPPED");
-      Robot.climber.climb(0);
-    }
+    Robot.feeder.feed(1.0);  
+  
+  }
+  
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    Robot.feeder.feed(0.0);
   }
 
   // Returns true when the command should end.

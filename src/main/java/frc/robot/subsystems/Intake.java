@@ -14,13 +14,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import org.frcteam2910.common.robot.Utilities;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.DoNothing;
 import frc.robot.commands.IntakeHoldRetracted;
 import frc.robot.commands.IntakePosition;
 
 
-public class Intake extends Subsystem {
+public class Intake extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
@@ -39,6 +39,7 @@ public class Intake extends Subsystem {
     extenderMotor1 = new CANSparkMax(EXTENDER1_CAN_ID, MotorType.kBrushless);
     extenderMotor2 = new CANSparkMax(EXTENDER2_CAN_ID, MotorType.kBrushless);
     
+    setDefaultCommand(new IntakeHoldRetracted());
     //extenderMotor1.setSmartCurrentLimit(20);
     //extenderMotor2.setSmartCurrentLimit(20);
   }
@@ -61,41 +62,8 @@ public class Intake extends Subsystem {
   }
 
   public void retract(double speed) {
-    extenderMotor1.set(speed);
-    extenderMotor2.set(-speed);
+    extenderMotor1.set(-speed);
+    extenderMotor2.set(speed);
   SmartDashboard.putNumber("Extender", speed);
   }
-
-  // @Override
-
-  // public void periodic() {
-  //   // This method will be called once per scheduler run
-
-  //   // //TODO move this dumb control code into a proper command
-  //   // putNumber = SmartDashboard.putNumber("Extender Pos.", getExtenderPosition());
-  //   // double inSpeed = Robot.oi.shooterController.getRawAxis(1);
-  //   // setIntakeSpeed(inSpeed);
-  
-  //   // Public void extend(double speed) {
-  //   //   extenderMotor1.set(speed);
-  //   //   extenderMotor2.set(-speed);
-  //   // SmartDashboard.putNumber("Extender", speed);
-  //   // }
-
-  //   // SmartDashboard.putNumber("Extender", speed);
-  //   // }
-  // }       
-
-  
-
-  @Override
-  protected void initDefaultCommand() {
-    // TODO Auto-generated method stub  
-    setDefaultCommand(new IntakeHoldRetracted());  
-  }
-
-  // public double getExtenderPosition() {
-  //   return EXTENDER_INCH_PER_COUNT * extenderMotor1.getEncoder().getPosition();
-  // }
-  
 }

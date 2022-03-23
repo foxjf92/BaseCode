@@ -9,17 +9,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class ManualShootCommand extends Command {
+public class ManualShootCommand extends CommandBase {
   
   /**
    * Creates a new Collect command.
    */
   public ManualShootCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    requires(Robot.shooter);
-    requires(Robot.feeder);
+    addRequirements(Robot.shooter);
+    addRequirements(Robot.feeder);
   }
 
   // Called when the command is initially scheduled.
@@ -56,7 +57,7 @@ public class ManualShootCommand extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void interrupted() {
+  public void end(boolean interrupted) {
     Robot.shooter.setMotorRPM(0);
   }
 

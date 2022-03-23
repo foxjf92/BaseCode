@@ -7,15 +7,22 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.FeederCollect;
+import frc.robot.commands.IntakeCollect;
+import frc.robot.subsystems.Feeder;
+import frc.robot.subsystems.Intake;
 
-public class DriveTriangle extends SequentialCommandGroup {
+
+public class Collect extends ParallelCommandGroup {
   /**
    * Add your docs here.
    */
-  public DriveTriangle() {
-    addCommands(new DriveXY(100, 0, 0, 0.5));
-    //addSequential(new DriveXY(100, 100, 0, 0.5));
-    //addSequential(new DriveXY(0, 0, 0, 0.5));
+  public Collect(Feeder feeder, Intake intake) {
+    addCommands(
+      new IntakeCollect(),
+      new FeederCollect()
+    );
+
   }
 }

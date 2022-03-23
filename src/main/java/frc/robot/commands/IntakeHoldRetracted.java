@@ -9,9 +9,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class IntakeHoldRetracted extends Command {
+public class IntakeHoldRetracted extends CommandBase {
   
   private static final double SPEED = 0.05;
 
@@ -21,7 +22,7 @@ public class IntakeHoldRetracted extends Command {
   
    public IntakeHoldRetracted() {
     // Use addRequirements() here to declare subsystem dependencies.
-    requires(Robot.intake);
+    addRequirements(Robot.intake);
   }
 
   // Called when the command is initially scheduled.
@@ -34,11 +35,6 @@ public class IntakeHoldRetracted extends Command {
   @Override
   public void execute() {
     Robot.intake.retract(SPEED);
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void interrupted() {
   }
 
   // Returns true when the command should end.

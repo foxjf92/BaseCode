@@ -4,17 +4,22 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.frcteam2910.common.robot.Utilities;
 
-public class DriveCommand extends Command {
+public class DriveCommand extends CommandBase {
 
     public DriveCommand() {
-        requires(Robot.driveTrain);
+        addRequirements(Robot.drivetrain);
     }
 
     @Override
-    protected void execute() {
+    public void initialize() {
+    }
+
+    @Override
+    public void execute() {
         double forward = -Robot.oi.driveController.getRawAxis(1);
         forward = Utilities.deadband(forward);
         // Square the forward stick
@@ -35,15 +40,16 @@ public class DriveCommand extends Command {
         fieldOrientedFlag = !Robot.oi.driveController.getRawButton(6);
 
         if(Robot.oi.driveController.getRawButtonPressed(5)) {
-            Robot.driveTrain.resetYaw();
+            Robot.drivetrain.resetYaw();
         }
 
-        Robot.driveTrain.drive(new Translation2d(forward, strafe), rotation, fieldOrientedFlag);
+        Robot.drivetrain.drive(new Translation2d(forward, strafe), rotation, fieldOrientedFlag);
 
     }
 
+    // Returns true when the command should end.
     @Override
-    protected boolean isFinished() {
-        return false;
+    public boolean isFinished() {
+      return false;
     }
 }

@@ -8,43 +8,37 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class ShootBall extends Command {
+public class ShootBall extends CommandBase {
   public ShootBall() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.shooter);
-    requires(Robot.feeder);
+    addRequirements(Robot.shooter);
+    addRequirements(Robot.feeder);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
     Robot.feeder.feed(1.0);
     System.out.println("Shooting RPM = " + Robot.shooter.getRpm());
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return !Robot.feeder.ballStatus1();
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
-    Robot.feeder.feed(0.0);
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
+  public void end(boolean interrupted) {
     Robot.feeder.feed(0.0);
   }
 }

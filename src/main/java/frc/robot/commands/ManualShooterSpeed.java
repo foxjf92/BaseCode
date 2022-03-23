@@ -11,11 +11,12 @@ import org.frcteam2910.common.robot.Utilities;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.MathUtil;
 import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
-public class ManualShooterSpeed extends Command {
+public class ManualShooterSpeed extends CommandBase {
   /**
    * Creates a new ManualShooterCommand.
    */
@@ -29,13 +30,13 @@ public class ManualShooterSpeed extends Command {
 
   public ManualShooterSpeed() {
     // Use addRequirements() here to declare subsystem dependencies.
-    requires(Robot.shooter);
+    addRequirements(Robot.shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    rpmSetpoint = 0.0;
+  //  rpmSetpoint = 0.0; //I think commenting this will let shooter speed persist 
   }
 
   // Called every time the scheduler runs while the command is scheduled.

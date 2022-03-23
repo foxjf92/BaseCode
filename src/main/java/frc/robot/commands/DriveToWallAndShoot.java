@@ -8,17 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DriveXY;
 //import frc.robot.commands.LoadBall;
 import frc.robot.commands.SetShooterSpeed;
 import frc.robot.commands.ShootBall;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 
-public class DriveToWallAndShoot extends CommandGroup {
+public class DriveToWallAndShoot extends SequentialCommandGroup {
   /**
    * Add your docs here.
    */
-  public DriveToWallAndShoot() {
-    addSequential(new SetShooterSpeed(ManualShooterSpeed.FAR_SETPOINT));
+  public DriveToWallAndShoot(Drivetrain drivetrain, Shooter shooter) {
+    addCommands(new SetShooterSpeed(ManualShooterSpeed.FAR_SETPOINT));
     //addSequential(new DriveXY(100, 0, 0, 0.5));
     //addSequential(new DriveXY(120, 0, 0, 0.2));
     //addSequential(new SetShooterSpeed(ManualShooterCommand.FAR_SETPOINT));
@@ -29,8 +32,8 @@ public class DriveToWallAndShoot extends CommandGroup {
     //addSequential(new ShootBall());
     //addSequential(new SetShooterSpeed(ManualShooterCommand.FAR_SETPOINT));
     //addSequential(new LoadBall());
-    addSequential(new ShootBall());
-    addSequential(new DriveXY(100, 0, 0, 0.5));
+    addCommands(new ShootBall());
+    addCommands(new DriveXY(100, 0, 0, 0.5));
     //addSequential(new DriveXY(100, 50, 0, 0.3));
   }
 }
