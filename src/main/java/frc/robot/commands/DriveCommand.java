@@ -1,9 +1,7 @@
 package frc.robot.commands;
 
-import frc.robot.Robot;
-import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.RobotContainer;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import org.frcteam2910.common.robot.Utilities;
@@ -11,7 +9,7 @@ import org.frcteam2910.common.robot.Utilities;
 public class DriveCommand extends CommandBase {
 
     public DriveCommand() {
-        addRequirements(Robot.drivetrain);
+        addRequirements(RobotContainer.drivetrain);
     }
 
     @Override
@@ -20,30 +18,31 @@ public class DriveCommand extends CommandBase {
 
     @Override
     public void execute() {
-        double forward = -Robot.oi.driveController.getRawAxis(1);
+        double forward = -RobotContainer.driveController.getRawAxis(1);
         forward = Utilities.deadband(forward);
         // Square the forward stick
         forward = Math.copySign(Math.pow(forward, 2.0), forward);
 
-        double strafe = -Robot.oi.driveController.getRawAxis(0);
+        double strafe = -RobotContainer.driveController.getRawAxis(0);
         strafe = Utilities.deadband(strafe);
         // Square the strafe stick
         strafe = Math.copySign(Math.pow(strafe, 2.0), strafe);
 
-        double rotation = -Robot.oi.driveController.getRawAxis(4);
+        double rotation = -RobotContainer.driveController.getRawAxis(4);
         rotation = Utilities.deadband(rotation, 0.040);
         // Square the rotation stick
         rotation = Math.copySign(Math.pow(rotation, 2.0), rotation);
 
         boolean fieldOrientedFlag;
 
-        fieldOrientedFlag = !Robot.oi.driveController.getRawButton(6);
+        fieldOrientedFlag = !RobotContainer.driveController.getRawButton(6);
 
-        if(Robot.oi.driveController.getRawButtonPressed(5)) {
-            Robot.drivetrain.resetYaw();
+        //Reset Command for Gyro
+        if(RobotContainer.driveController.getRawButtonPressed(5)) {
+            RobotContainer.drivetrain.resetYaw();
         }
 
-        Robot.drivetrain.drive(new Translation2d(forward, strafe), rotation, fieldOrientedFlag);
+        RobotContainer.drivetrain.drive(new Translation2d(forward, strafe), rotation, fieldOrientedFlag);
 
     }
 

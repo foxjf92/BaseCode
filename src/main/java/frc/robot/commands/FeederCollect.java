@@ -8,9 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
-import frc.robot.subsystems.Feeder;
+import frc.robot.RobotContainer;
 
 public class FeederCollect extends CommandBase {
   //private static final double EXTEND_SPEED = 0.5;
@@ -20,7 +18,7 @@ public class FeederCollect extends CommandBase {
    */
   public FeederCollect() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.feeder);
+    addRequirements(RobotContainer.feeder);
   }
 
   // Called when the command is initially scheduled.
@@ -32,15 +30,20 @@ public class FeederCollect extends CommandBase {
   @Override
   public void execute() {
 
-    Robot.feeder.feed(.25);  
-  
+    if(RobotContainer.feeder.ballStatus1()){
+      RobotContainer.feeder.feed(.25); 
+    }
+    else{
+      RobotContainer.feeder.feed(0.0);
+    }
+    
   }
   
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.feeder.feed(0);
+    RobotContainer.feeder.feed(0);
   }
 
   // Returns true when the command should end.

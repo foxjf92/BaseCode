@@ -7,10 +7,9 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 
 public class IntakePosition extends CommandBase {
   
@@ -22,42 +21,42 @@ public class IntakePosition extends CommandBase {
   
    public IntakePosition() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.intake);
+    addRequirements(RobotContainer.intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.intake.setExtenderCurrentLimit(20);
+    RobotContainer.intake.setExtenderCurrentLimit(20);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    if(Robot.oi.shooterController.getRawButton(4)) { // Y Button
+    if(RobotContainer.shooterController.getRawButton(4)) { // Y Button
       SmartDashboard.putString("ExtendState", "EXTEND");
-      Robot.intake.extend(SPEED);
-    } else if(Robot.oi.shooterController.getRawButton(3)){ // X Button
+      RobotContainer.intake.extend(SPEED);
+    } else if(RobotContainer.shooterController.getRawButton(3)){ // X Button
       SmartDashboard.putString("ExtendState", "RETRACT");
-      Robot.intake.retract(-SPEED);
+      RobotContainer.intake.retract(-SPEED);
     } else {
       SmartDashboard.putString("ExtendState", "STOP");
-      Robot.intake.extend(0);
+      RobotContainer.intake.extend(0);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.intake.extend(0);
-    Robot.intake.retract(0);
+    RobotContainer.intake.extend(0);
+    RobotContainer.intake.retract(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Robot.oi.shooterController.getRawButtonReleased(4) || Robot.oi.shooterController.getRawButtonReleased(3)){
+    if(RobotContainer.shooterController.getRawButtonReleased(4) || RobotContainer.shooterController.getRawButtonReleased(3)){
         return true;
     }
     else{

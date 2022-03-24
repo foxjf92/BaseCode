@@ -12,12 +12,9 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import org.frcteam2910.common.robot.Utilities;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.DoNothing;
 import frc.robot.commands.IntakeHoldRetracted;
-import frc.robot.commands.IntakePosition;
 
 
 public class Intake extends SubsystemBase {

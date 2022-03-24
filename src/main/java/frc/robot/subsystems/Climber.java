@@ -11,10 +11,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.ClimbCommand;
 
 public class Climber extends SubsystemBase {
   private static final int CLIMBER_CAN_ID = 14;
@@ -25,7 +23,7 @@ public class Climber extends SubsystemBase {
     climberMotor = new TalonFX(CLIMBER_CAN_ID);
     climberMotor.setNeutralMode(NeutralMode.Brake);
 
-    setDefaultCommand(new ClimbCommand());
+    //setDefaultCommand(new ClimbCommand());
   }
 
   @Override

@@ -7,10 +7,9 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 
 public class ClimbCommand extends CommandBase {
   private static final double CLIMB_SPEED = 1.0;
@@ -20,7 +19,7 @@ public class ClimbCommand extends CommandBase {
    */
   public ClimbCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.climber);
+    addRequirements(RobotContainer.climber);
   }
 
   // Called when the command is initially scheduled.
@@ -32,17 +31,17 @@ public class ClimbCommand extends CommandBase {
   @Override
   public void execute() {
 
-    if(Robot.oi.shooterController.getRawButton(6)) {
+    if(RobotContainer.shooterController.getRawButton(6)) {
       SmartDashboard.putString("ClimbState", "CLIMB EXTENDING");
-      Robot.climber.climb(CLIMB_SPEED);
+      RobotContainer.climber.climb(CLIMB_SPEED);
     } 
-    else if(Robot.oi.shooterController.getRawButton(5)) {
+    else if(RobotContainer.shooterController.getRawButton(5)) {
       SmartDashboard.putString("ClimbState", "CLIMB RETRACTING");
-      Robot.climber.climb(-CLIMB_SPEED);
+      RobotContainer.climber.climb(-CLIMB_SPEED);
     } 
     else {
       SmartDashboard.putString("ClimbState", "STOPPED");
-      Robot.climber.climb(0);
+      RobotContainer.climber.climb(0);
     }
   }
 

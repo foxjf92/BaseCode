@@ -7,14 +7,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 
 public class DriveXY extends CommandBase {
 
@@ -28,7 +27,7 @@ public class DriveXY extends CommandBase {
   double speedScale;
 
   public Transform2d getDelta() {
-    return target.minus(Robot.drivetrain.getPose());
+    return target.minus(RobotContainer.drivetrain.getPose());
   }
 
   public double getDistanceToTarget() {
@@ -37,7 +36,7 @@ public class DriveXY extends CommandBase {
 
   public DriveXY(double x, double y, double angleDegrees, double speed) {
     // Use requires() here to declare subsystem dependencies
-    addRequirements(Robot.drivetrain);
+    addRequirements(RobotContainer.drivetrain);
     speedScale = speed;
     target = new Pose2d(new Translation2d(x, y), Rotation2d.fromDegrees(angleDegrees));
   }
@@ -49,7 +48,7 @@ public class DriveXY extends CommandBase {
   public void initialize() {
     startTimeMicroSeconds = RobotController.getFPGATime();
     System.out.println("Starting Drive command:");
-    System.out.println("from:" + Robot.drivetrain.getPose().toString());
+    System.out.println("from:" + RobotContainer.drivetrain.getPose().toString());
     System.out.println("to:" + target.toString());
   }
 
@@ -81,7 +80,7 @@ public class DriveXY extends CommandBase {
 
     //System.out.println("driving: " + translation.toString() + " heading: " + heading);
     //Robot.driveTrain.driveHeading(translation, heading);
-    Robot.drivetrain.drive(translation, 0.0, true);
+    RobotContainer.drivetrain.drive(translation, 0.0, true);
   }
 
 
@@ -94,7 +93,7 @@ public class DriveXY extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    Robot.drivetrain.stop();
+    RobotContainer.drivetrain.stop();
     if(interrupted){
       System.out.println("interrupted move after" + getElapsedTime() + "seconds");
     }

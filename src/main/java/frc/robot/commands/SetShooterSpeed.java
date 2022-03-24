@@ -7,9 +7,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 
 public class SetShooterSpeed extends CommandBase {
   double setpoint;
@@ -20,7 +19,7 @@ public class SetShooterSpeed extends CommandBase {
   public SetShooterSpeed(double motorRPM) {
     // Use requires() here to declare subsystem dependencies
     setpoint = motorRPM;
-    addRequirements(Robot.shooter);
+    addRequirements(RobotContainer.shooter);
   }
 
   // Called just before this Command runs the first time
@@ -31,13 +30,13 @@ public class SetShooterSpeed extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    Robot.shooter.setMotorRPM(setpoint);
+    RobotContainer.shooter.setMotorRPM(setpoint);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    return Math.abs(Robot.shooter.getRpm() - setpoint) < tolerance;
+    return Math.abs(RobotContainer.shooter.getRpm() - setpoint) < tolerance;
   }
 
   // Called once after isFinished returns true

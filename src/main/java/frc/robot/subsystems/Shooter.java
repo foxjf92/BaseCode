@@ -10,16 +10,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.revrobotics.CANSparkMax;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.DoNothing;
-import frc.robot.commands.ManualShooterSpeed;
-//import edu.wpi.first.wpiutil.math.*;
 
 public class Shooter extends SubsystemBase {
 
@@ -27,21 +20,18 @@ public class Shooter extends SubsystemBase {
 
   private final int SHOOTER_MOTOR_CAN_ID = 13;
 
-  public static final double DEFAULT_RPM = 0.0;
+  private static final double DEFAULT_RPM = 0.0;
   public static final double MAX_RPM = 6500.0;
-  public static final double MAX_VEL = 22000.0;
+  //private static final double MAX_VEL = 22000.0;
 
   /**
    * Creates a new shooter.
    */
 
   TalonFX shooterMotor;
-  CANSparkMax feedMotor;
-  //DigitalInput feedTriggerSwitch;
+  //CANSparkMax feedMotor;
 
   public Shooter() {
-    
-    setDefaultCommand(new ManualShooterSpeed());
     
     shooterMotor = new TalonFX(SHOOTER_MOTOR_CAN_ID);
     shooterMotor.setNeutralMode(NeutralMode.Coast);
@@ -59,12 +49,6 @@ public class Shooter extends SubsystemBase {
     //feedTriggerSwitch = new DigitalInput(0);
   }
 
-  public Double getRpm() {
-    Double countsPerHundredMs = shooterMotor.getSelectedSensorVelocity();
-    Double rpm = countsPerHundredMs * 60000.0 / (100 * 2048);
-
-    return rpm;
-  }
 
   @Override
   public void periodic() {
@@ -74,9 +58,12 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("Shooter VEL", shooterMotor.getSelectedSensorVelocity());
   }
 
-  // public boolean ballReady() {
-  //  return !feedTriggerSwitch.get();
-  // }
+  public Double getRpm() {
+    Double countsPerHundredMs = shooterMotor.getSelectedSensorVelocity();
+    Double rpm = countsPerHundredMs * 60000.0 / (100 * 2048);
+
+    return rpm;
+  }
 
   public void setMotorRPM(double rpm) {
 
@@ -85,7 +72,7 @@ public class Shooter extends SubsystemBase {
     shooterMotor.set(ControlMode.Velocity, velocity);
     //System.out.println("shooter velocity = " + velocity);
   }
-
+  
   // public void setMotorPercent(double value) {
   //   shooterMotor.set(ControlMode.PercentOutput, value);
   // }

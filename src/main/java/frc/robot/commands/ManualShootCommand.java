@@ -7,10 +7,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 
 public class ManualShootCommand extends CommandBase {
   
@@ -19,8 +17,8 @@ public class ManualShootCommand extends CommandBase {
    */
   public ManualShootCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.shooter);
-    addRequirements(Robot.feeder);
+    addRequirements(RobotContainer.shooter);
+    addRequirements(RobotContainer.feeder);
   }
 
   // Called when the command is initially scheduled.
@@ -32,14 +30,19 @@ public class ManualShootCommand extends CommandBase {
   @Override
   public void execute() {
 
-    double shootTriggerValue = Robot.oi.shooterController.getRawAxis(3); //should be right trigger
-    
-    if(shootTriggerValue > 0.1){
-      Robot.feeder.feed(1.0);
+    if(RobotContainer.shooter.getRpm() > 0){
+      RobotContainer.feeder.feed(1.0);
     }
-    else{
-      Robot.feeder.feed(0);
-    }
+
+    //Removed afgter trigger added to RobotContainer
+    //double shootTriggerValue = Robot.oi.shooterController.getRawAxis(3); //should be right trigger
+    // 
+    // if(shootTriggerValue > 0.1){
+    //   Robot.feeder.feed(1.0);
+    // }
+    // else{
+    //   Robot.feeder.feed(0);
+    // }
     
     //FIXME Work out logic to run feed while intaking, maybe here?
 
@@ -58,7 +61,7 @@ public class ManualShootCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.shooter.setMotorRPM(0);
+    RobotContainer.shooter.setMotorRPM(0);
   }
 
   // Returns true when the command should end.

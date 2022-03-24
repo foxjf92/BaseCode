@@ -7,13 +7,10 @@
 
 package frc.robot.commands;
 
-import org.frcteam2910.common.robot.Utilities;
-
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.math.MathUtil;
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
 
 public class ManualShooterSpeed extends CommandBase {
@@ -30,20 +27,14 @@ public class ManualShooterSpeed extends CommandBase {
 
   public ManualShooterSpeed() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.shooter);
+    addRequirements(RobotContainer.shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  //  rpmSetpoint = 0.0; //I think commenting this will let shooter speed persist 
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-
-    int pov = Robot.oi.shooterController.getPOV();
+    //Checks on initilization instead of continuously?
+    int pov = RobotContainer.shooterController.getPOV();
     
     if(pov == 0) {
       rpmSetpoint += INCREMENT;
@@ -54,14 +45,32 @@ public class ManualShooterSpeed extends CommandBase {
     } else if(pov == 270) {
       rpmSetpoint = FAR_SETPOINT;
     }
+  //  rpmSetpoint = 0.0; //I think commenting this will let shooter speed persist 
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+
+    // int pov = Robot.oi.shooterController.getPOV();
+    
+    // if(pov == 0) {
+    //   rpmSetpoint += INCREMENT;
+    // } else if(pov == 180) {
+    //   rpmSetpoint = ZERO_SPEED;
+    // } else if(pov == 90) {
+    //   rpmSetpoint = NEAR_SETPOINT;
+    // } else if(pov == 270) {
+    //   rpmSetpoint = FAR_SETPOINT;
+    // }
 
     rpmSetpoint = MathUtil.clamp(rpmSetpoint, 0.0, Shooter.MAX_RPM
     );
 
-    double rpm = Robot.shooter.getRpm();
+    double rpm = RobotContainer.shooter.getRpm();
     double sendValue = MathUtil.clamp(rpmSetpoint, rpm - 500, rpm + 500);
     
-    Robot.shooter.setMotorRPM(sendValue);
+    RobotContainer.shooter.setMotorRPM(sendValue);
     SmartDashboard.putNumber("Shooter Setpoint", rpmSetpoint);
 
     // double feedspeed;
