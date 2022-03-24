@@ -7,20 +7,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.DriveXY;
-//import frc.robot.commands.LoadBall;
-import frc.robot.commands.SetShooterSpeed;
-import frc.robot.commands.ShootBall;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Shooter;
 
 public class DriveToWallAndShoot extends SequentialCommandGroup {
   /**
    * Add your docs here.
    */
-  public DriveToWallAndShoot(Drivetrain drivetrain, Shooter shooter) {
+  public DriveToWallAndShoot() {
     addCommands(new SetShooterSpeed(ManualShooterSpeed.FAR_SETPOINT));
     //addSequential(new DriveXY(100, 0, 0, 0.5));
     //addSequential(new DriveXY(120, 0, 0, 0.2));
