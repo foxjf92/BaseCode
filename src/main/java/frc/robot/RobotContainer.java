@@ -49,12 +49,12 @@ public class RobotContainer {
   //Commands here
   private final Command m_climbCommand = new ClimbCommand();
   private final Command m_driveCommand = new DriveCommand();
-  private final Command m_feederCollect = new FeederCollect();
-  private final Command m_feederShoot = new FeederShoot();
-  private final Command m_intakeCollect = new IntakeCollect();
+  // private final Command m_feederCollect = new FeederCollect();
+  // private final Command m_feederShoot = new FeederShoot();
+  // private final Command m_intakeCollect = new IntakeCollect();
   private final Command m_intakeHoldRetracted = new IntakeHoldRetracted();
   private final Command m_intakePosition = new IntakePosition();
-  private final Command m_manualShootCommand = new ManualShootCommand();
+  //private final Command m_manualShootCommand = new ManualShootCommand();
   private final Command m_manualShooterSpeed = new ManualShooterSpeed();
   
   //Command Groups
